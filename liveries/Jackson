@@ -1,0 +1,29 @@
+// ==UserScript==
+// @name         GeoFS Headlights Toggle
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Toggle airplane headlights in GeoFS
+// @author       YourName
+// @match        https://www.geo-fs.com/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Function to toggle headlights
+    function toggleHeadlights() {
+        if (geofs.aircraft.instance.lights) {
+            geofs.aircraft.instance.lights.landing = !geofs.aircraft.instance.lights.landing;
+            geofs.aircraft.instance.lights.taxi = !geofs.aircraft.instance.lights.taxi;
+        }
+    }
+
+    // Add a keyboard shortcut (e.g., "H" key) to toggle headlights
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "h" || event.key === "H") {
+            toggleHeadlights();
+            console.log("Headlights toggled!");
+        }
+    });
+})();
